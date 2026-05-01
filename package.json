@@ -19,19 +19,19 @@
     "format": "prettier -w ."
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.7",
-    "@tailwindcss/typography": "^0.5.13",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47",
-    "postcss-cli": "^11.0.0",
-    "prettier": "^3.3.3",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.13",
+    "postcss-cli": "^11.0.1",
+    "prettier": "^3.8.3",
     "prettier-plugin-go-template": "^0.0.15",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwind-bootstrap-grid": "^5.1.0",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.19"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "github-calendar": "^2.3.4"
   }
 }
