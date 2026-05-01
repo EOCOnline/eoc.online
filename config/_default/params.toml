@@ -5,7 +5,7 @@ logFile = "D:/Projects/EOC.online/eoconline.github.io/hugo2.log"
 
 #################### default parameters ################################
 # favicon module: https://github.com/gethugothemes/hugo-modules/tree/master/images#favicon-implementation
-favicon = "images/favicon.png.x "
+favicon = "images/favicon.png"
 # logo module: https://github.com/gethugothemes/hugo-modules/tree/master/images#logo-implementation
 logo = "images/logo.png"
 logo_darkmode = "images/logo-darkmode.png"
