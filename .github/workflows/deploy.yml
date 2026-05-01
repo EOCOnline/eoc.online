@@ -32,6 +32,9 @@ jobs:
       - name: Build
         run: hugo
 
+      - name: Remove large files from output
+        run: find public -type f -size +25M -delete
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
