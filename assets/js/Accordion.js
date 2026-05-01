@@ -1,8 +1,8 @@
-// https://tw-elements.com/docs/standard/components/accordion/
-// Initialization for ES Users
-import {
-  Collapse,
-  initTWE,
-} from "tw-elements";
+// Initialize TW Elements accordion only when globals are available.
+(function initAccordion() {
+  if (typeof window === "undefined") return;
+  if (typeof window.initTWE !== "function") return;
+  if (!window.Collapse) return;
 
-initTWE({ Collapse });
+  window.initTWE({ Collapse: window.Collapse });
+})();
