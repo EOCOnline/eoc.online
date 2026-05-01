@@ -40,4 +40,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy public --project-name=eoc-online
+          command: pages deploy public --project-name=eoc-online --commit-dirty=true
+          # silence the git dirty warning, since the find step modifies the build output after checkout
