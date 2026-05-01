@@ -1,11 +1,10 @@
 {{ define "main" }}
-  {{ partial "page-header" . }}
+{{ partial "page-header" . }}
 
+{{ $growingBranches := resources.Get "js/growingBranches.js" }}
+<script defer src="{{ $growingBranches.RelPermalink }}"></script>
 
-  <script src="/scripts/growingBranches.js" crossorigin="anonymous"></script>
-  <script defer language="javascript" type="text/javascript" src="{{ "/scripts/growingBranches.js" | urlize | relURL }}"></script>
-
-  <!-- section class="section-sm">
+<!-- section class="section-sm">
     <div class="container">
       <div class="row">
         <div class="mx-auto md:col-10 lg:col-6">
@@ -29,43 +28,49 @@
     </div>
   </section -->
 
-  <!-- google map -->
-  {{ with site.Params.google_map }}
-    {{ if .enable }}
-      <div id="map" style="height: 400px;" data-latitude="{{ .map_latitude }}" data-longitude="{{ .map_longitude }}" data-marker="{{ .map_marker | relURL }}" data-marker-name="{{ site.Title }}"></div>
-    {{ end }}
-  {{ end }}
+<!-- google map -->
+{{ with site.Params.google_map }}
+{{ if .enable }}
+<div id="map" style="height: 400px;" data-latitude="{{ .map_latitude }}" data-longitude="{{ .map_longitude }}"
+  data-marker="{{ .map_marker | relURL }}" data-marker-name="{{ site.Title }}"></div>
+{{ end }}
+{{ end }}
 
-  {{ with site.Params.subscription }}
-    {{ if .enable }}
-      <!-- subscription form -->
-      <form action="{{ .mailchimp_form_action | safeURL }}" method="post" id="mc-embedded-subscribe-form" novalidate="novalidate">
-        <div class="mx-auto mb-3 input-group w-75">
-          <input type="email" name="EMAIL" placeholder="Email" class="form-control required email mce_inline_error" id="mce-EMAIL" aria-required="true" autocomplete="off" required />
-          <button class="input-group-text" name="subscribe" id="mc-embedded-subscribe">
-            {{ .button_label }}
-          </button>
-        </div>
-        <input type="hidden" name="EMAILTYPE" id="mce-EMAILTYPE-0" value="html" />
-        <div style="position:absolute;left:-5000px" aria-hidden="true">
-          <input type="text" name="{{ .name }}" tabindex="-1" />
-        </div>
-      </form>
-      <div id="mce-responses" class="clear">
-        <div class="text-white response" id="mce-error-response" style="display:none"></div>
-        <div class="text-white response" id="mce-success-response" style="display:none"></div>
-      </div>
-      <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-      <!-- /subscription form -->
-    {{ end }}
-  {{ end }}
+{{ with site.Params.subscription }}
+{{ if .enable }}
+<!-- subscription form -->
+<form action="{{ .mailchimp_form_action | safeURL }}" method="post" id="mc-embedded-subscribe-form"
+  novalidate="novalidate">
+  <div class="mx-auto mb-3 input-group w-75">
+    <input type="email" name="EMAIL" placeholder="Email" class="form-control required email mce_inline_error"
+      id="mce-EMAIL" aria-required="true" autocomplete="off" required />
+    <button class="input-group-text" name="subscribe" id="mc-embedded-subscribe">
+      {{ .button_label }}
+    </button>
+  </div>
+  <input type="hidden" name="EMAILTYPE" id="mce-EMAILTYPE-0" value="html" />
+  <div style="position:absolute;left:-5000px" aria-hidden="true">
+    <input type="text" name="{{ .name }}" tabindex="-1" />
+  </div>
+</form>
+<div id="mce-responses" class="clear">
+  <div class="text-white response" id="mce-error-response" style="display:none"></div>
+  <div class="text-white response" id="mce-success-response" style="display:none"></div>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+<!-- /subscription form -->
+{{ end }}
+{{ end }}
 
-  {{ if site.Params.google_map.enable }}
-    {{ $gmap:= resources.Get "plugins/maps/google-map.js" }}
-    <script defer src="{{ $gmap.RelPermalink }}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ site.Params.google_map.map_api_key }}&libraries=places"></script>
-  {{ end }}
+{{ if site.Params.google_map.enable }}
+{{ $gmap:= resources.Get "plugins/maps/google-map.js" }}
+<script defer src="{{ $gmap.RelPermalink }}"></script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key={{ site.Params.google_map.map_api_key }}&libraries=places"></script>
+{{ end }}
 
 
-  <p><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeYYJfucVECgg0WB2O-JtJHYZht8X5NHo2UJ46Nopn6M7vfDw/viewform?embedded=true" width="100%" height="943" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe></p>
+<p><iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSeYYJfucVECgg0WB2O-JtJHYZht8X5NHo2UJ46Nopn6M7vfDw/viewform?embedded=true"
+    width="100%" height="943" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe></p>
 {{ end }}
