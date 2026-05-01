@@ -1,0 +1,23 @@
+{{ $title := site.Title }}
+{{ if and (not .IsHome) .Title }}
+{{ $title = printf "%s | %s" .Title site.Title }}
+{{ end }}
+{{ with .Params.meta_title }}
+{{ $title = . }}
+{{ end }}
+
+{{ $description := site.Params.description }}
+{{ with .Params.description }}
+{{ $description = . }}
+{{ end }}
+
+{{ $image := "" }}
+{{ with .Params.image }}
+{{ $image = . | absURL }}
+{{ end }}
+
+<meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}" />
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $description }}" />
+{{ with $image }}
+<meta name="twitter:image" content="{{ . }}" />{{ end }}

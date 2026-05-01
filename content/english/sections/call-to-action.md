@@ -9,6 +9,6 @@ button:
   link: "https://github.com/eoconline/eoconline.github.io"
 
 # don't create a separate page
-_build:
+build:
   render: "never"
 ---

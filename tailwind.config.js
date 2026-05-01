@@ -26,6 +26,17 @@ if (theme.fonts.font_family.secondary) {
   fontSecondaryType = theme.fonts.font_family.secondary_type;
 }
 
+function loadTailwindPlugin(packageName) {
+  try {
+    return require(packageName);
+  } catch (error) {
+    console.warn(
+      `[tailwind] Optional plugin not loaded: ${packageName}. ${error.message}`,
+    );
+    return function noopPlugin() { };
+  }
+}
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./hugo_stats.json"],
@@ -86,8 +97,8 @@ module.exports = {
     },
   },
   plugins: [
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/forms"),
+    loadTailwindPlugin("@tailwindcss/typography"),
+    loadTailwindPlugin("@tailwindcss/forms"),
     require("tailwind-bootstrap-grid")({
       generateContainer: false,
       gridGutterWidth: "2rem",

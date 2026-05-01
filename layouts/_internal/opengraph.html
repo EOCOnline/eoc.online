@@ -1,0 +1,29 @@
+{{ $title := site.Title }}
+{{ if and (not .IsHome) .Title }}
+{{ $title = printf "%s | %s" .Title site.Title }}
+{{ end }}
+{{ with .Params.meta_title }}
+{{ $title = . }}
+{{ end }}
+
+{{ $description := site.Params.description }}
+{{ with .Params.description }}
+{{ $description = . }}
+{{ end }}
+
+{{ $url := .Permalink }}
+{{ $type := "website" }}
+{{ if .IsPage }}{{ $type = "article" }}{{ end }}
+
+{{ $image := "" }}
+{{ with .Params.image }}
+{{ $image = . | absURL }}
+{{ end }}
+
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:type" content="{{ $type }}" />
+<meta property="og:url" content="{{ $url }}" />
+<meta property="og:site_name" content="{{ site.Title }}" />
+{{ with $image }}
+<meta property="og:image" content="{{ . }}" />{{ end }}

@@ -15,7 +15,6 @@ features:
   - title: "EOC Specific Insights"
     image: "/images/rangertrak/GoogleMaps.512x403.png"
     content: "We focus on smaller rural (& international) Emergency Operation Centers with few dedicated staff"
-    content: "We focus on smaller rural (& international) Emergency Operation Centers with few dedicated staff"
     bulletpoints:
       - Learn about FEMA's recent innovations in supporting EOC (& IMTs) over the past decade
       - What do we think of software used by EOCs? Check out our take on them.
