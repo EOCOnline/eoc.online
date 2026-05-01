@@ -10,31 +10,18 @@
 {{ $toMonth := int .toMonth }}
 {{ $pages := .pages }}
 
-{{ $context.Scratch.Set "currentYear" $fromYear }}
-{{ $context.Scratch.Add "consideredYears" (slice $fromYear) }}
-
 {{ range ($pages.GroupByPublishDate "2006") }}
-  {{ $context.Scratch.SetInMap "ArticlesPerYear" .Key ((len .Pages)) }}
+{{ $context.Scratch.SetInMap "ArticlesPerYear" .Key ((len .Pages)) }}
 {{ end }}
 
 {{ range ($pages.GroupByPublishDate "2006-01") }}
-  {{ $context.Scratch.SetInMap "ArticlesPerMonth" .Key (len .Pages) }}
+{{ $context.Scratch.SetInMap "ArticlesPerMonth" .Key (len .Pages) }}
 {{ end }}
 
 {{ range ($pages.GroupByPublishDate "2006-01-02") }}
-  {{ $context.Scratch.SetInMap "ArticlesPerDay" .Key (len .Pages) }}
+{{ $context.Scratch.SetInMap "ArticlesPerDay" .Key (len .Pages) }}
 {{ end }}
 
-{{ range $i, $sequence := (seq ((sub $toYear $fromYear))) }}
-  {{ $currentYear := $context.Scratch.Get "currentYear" }}
-  {{ $nextYear := (add $fromYear $sequence) }}
-
-  {{ if le $nextYear $toYear }}
-    {{ $context.Scratch.Add "consideredYears" ($nextYear) }}
-    {{ $context.Scratch.Set "currentYear" $nextYear }}
-  {{ end }}
-
-{{ end }}
 
 
 <div class="mb-4 hugo-calendar-widget">
@@ -54,8 +41,11 @@
 
 
   <div class="block mb-2 text-right">
-    <label for="viewSelect" class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-200">View: &nbsp;</label>
-    <select id="viewSelect" name="viewSelect" class="py-0 pl-2 pr-10 mt-2 text-gray-600 border-0 rounded-md dark:text-gray-800 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-200 sm:text-sm sm:leading-6" oninput="changeView()">
+    <label for="viewSelect" class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-200">View:
+      &nbsp;</label>
+    <select id="viewSelect" name="viewSelect"
+      class="py-0 pl-2 pr-10 mt-2 text-gray-600 border-0 rounded-md dark:text-gray-800 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-200 sm:text-sm sm:leading-6"
+      oninput="changeView()">
       <option selected title="{{ $view1_title }}">{{ $view1_text }}</option>
       <option title="{{ $view2_title }}">{{ $view2_text }}</option>
       <option title="{{ $view3_title }}">{{ $view3_text }}</option>
@@ -64,10 +54,11 @@
     </select>
   </div>
 
-  {{ range ($context.Scratch.Get "consideredYears") }}
-    {{ partialCached "calendar/year" (dict "context" $context "year" . "fromYear" $fromYear "fromMonth" $fromMonth "toYear" $toYear
-      "toMonth" $toMonth) (string (delimit (slice $fromYear $fromMonth $toYear $toMonth .) ""))
-    }}
+  {{ range (seq $fromYear $toYear) }}
+  {{ partialCached "calendar/year" (dict "context" $context "year" . "fromYear" $fromYear "fromMonth" $fromMonth
+  "toYear" $toYear
+  "toMonth" $toMonth) (string (delimit (slice $fromYear $fromMonth $toYear $toMonth .) ""))
+  }}
   {{ end }}
 
 </div>
@@ -94,14 +85,14 @@
     let closed = year.querySelectorAll(".close-folder");
     let opened = year.querySelectorAll(".open-folder");
 
-    closed.forEach(year => {year.classList.add("open-folder"); year.classList.remove("close-folder")});
-    opened.forEach(year => {year.classList.add("close-folder"); year.classList.remove("open-folder")});
+    closed.forEach(year => { year.classList.add("open-folder"); year.classList.remove("close-folder") });
+    opened.forEach(year => { year.classList.add("close-folder"); year.classList.remove("open-folder") });
   }
 
 
   function changeView() {
     let viewSelect = document.getElementById("viewSelect");
-    switch(viewSelect.options[viewSelect.selectedIndex].text) {
+    switch (viewSelect.options[viewSelect.selectedIndex].text) {
       case "{{ $view1_text }}":
         displayYears();
         break;
@@ -130,7 +121,7 @@
     document.querySelectorAll(".month-no-articles").forEach(month => month.classList.add("hidden"));
     document.querySelectorAll(".calendar-month-calendar").forEach(month => month.classList.add("hidden"));
     // close all folders...
-    document.querySelectorAll(".open-folder").forEach(year => {year.classList.add("close-folder"); year.classList.remove("open-folder");});
+    document.querySelectorAll(".open-folder").forEach(year => { year.classList.add("close-folder"); year.classList.remove("open-folder"); });
   }
 
   // Months: Just display Years with insights, plus months with insights
@@ -141,7 +132,7 @@
     document.querySelectorAll(".month-no-articles").forEach(month => month.classList.add("hidden"));
     document.querySelectorAll(".calendar-month-calendar").forEach(month => month.classList.add("hidden"));
     // open all folders
-    document.querySelectorAll(".close-folder").forEach(year => {year.classList.add("open-folder"); year.classList.remove("close-folder");});
+    document.querySelectorAll(".close-folder").forEach(year => { year.classList.add("open-folder"); year.classList.remove("close-folder"); });
   }
 
   // Months: Just display Years with insights, plus months & calendars with insights
@@ -152,7 +143,7 @@
     document.querySelectorAll(".month-no-articles").forEach(month => month.classList.add("hidden"));
     document.querySelectorAll(".calendar-month-calendar").forEach(month => month.classList.remove("hidden"));
     // open all folders
-    document.querySelectorAll(".close-folder").forEach(year => {year.classList.add("open-folder"); year.classList.remove("close-folder");});
+    document.querySelectorAll(".close-folder").forEach(year => { year.classList.add("open-folder"); year.classList.remove("close-folder"); });
   }
 
   // All Years, display months and calendars, even without insights
@@ -163,7 +154,7 @@
     document.querySelectorAll(".month-no-articles").forEach(month => month.classList.remove("hidden"));
     document.querySelectorAll(".calendar-month-calendar").forEach(month => month.classList.remove("hidden"));
     // open all folders
-    document.querySelectorAll(".close-folder").forEach(year => {year.classList.add("open-folder"); year.classList.remove("close-folder");});
+    document.querySelectorAll(".close-folder").forEach(year => { year.classList.add("open-folder"); year.classList.remove("close-folder"); });
   }
 
   // Hide entire widget (i.e., all years)

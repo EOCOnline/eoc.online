@@ -3,6 +3,7 @@
 ## 1.1.0 - 2026-05-01
 
 ### What changed
+
 - Upgraded and stabilized the Hugo build pipeline for modern Hugo behavior (v0.154.x), including compatibility fixes for deprecated template/front matter patterns.
 - Fixed multiple build blockers found during migration work:
   - Deprecated permalink token updated to `:slugorcontentbasename`.
@@ -16,10 +17,12 @@
 - Regenerated and wired a comprehensive favicon/manifest/browser compatibility icon set.
 
 ### Operational notes
+
 - Cloudflare Pages should use:
   - Build command: `pnpm run build`
   - Output directory: `public`
   - Environment variable: `NODE_VERSION=24`
 
 ### Why this is a minor bump
+
 This release contains significant operational and deployment changes (build/runtime compatibility, repository migration, and CI/CD strategy updates), beyond a simple bugfix patch.
