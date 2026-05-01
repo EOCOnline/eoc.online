@@ -1,8 +1,5 @@
 {
-    "name": {
-        { site.Title | jsonify
-        }
-    },
+    "name": {{ site.Title | jsonify }},
     "short_name": "eoc.online",
     "lang": "en-US",
     "display": "standalone",
