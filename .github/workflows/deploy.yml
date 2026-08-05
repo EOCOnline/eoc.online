@@ -21,16 +21,20 @@ jobs:
           hugo-version: latest
           extended: true
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: pnpm
 
-      - name: Install PostCSS
-        run: npm install postcss postcss-cli autoprefixer
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: hugo
+        run: pnpm build
 
       - name: Remove large files from output
         run: find public -type f -size +25M -delete
