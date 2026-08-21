@@ -17,6 +17,7 @@
     "project-setup": "node ./scripts/projectSetup.js",
     "theme-setup": "node ./scripts/themeSetup.js",
     "update-theme": "node ./scripts/themeUpdate.js",
+    "postinstall": "node ./scripts/fixNodeBinShims.js",
     "format": "prettier -w ."
   },
   "devDependencies": {
